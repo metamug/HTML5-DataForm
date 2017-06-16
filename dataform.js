@@ -25,3 +25,13 @@ DataForm.prototype.load = function(url) {
 	})
 	xhr.send();
 };
+
+
+DataForm.prototype.send = function(url) {
+	var xhr = new XMLHttpRequest();
+	var data = new FormData(this.form);
+	//open the request
+	xhr.open('POST', url)
+	//send the form data
+	xhr.send(data);	
+};
