@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>FORM PROCESSING</title>	
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="./dataform.js"></script>
+</head>
+<body style="padding:4em;">
+
+<div class="container">
+	<div class="col-md-3 col-md-offset-2">
+		<H3>LOGIN PAGE</H3>	
+		<form id="x-login-form">
+			<div class="form-group">
+			  <label for="xuser">Username</label>
+			  <input type="text" name="iuser" class="form-control" />
+			</div>
+			<div class="form-group">	 
+			  <label for="xpass">Password</label>
+			  <input type="password" name="xpass" class="form-control" />
+			</div>
+			<div class="form-group">	 
+			  <label for="comment">Details</label>
+			  <textarea rows="4" cols="50" name="comment" class="form-control" ></textarea>	
+		  	</div>    
+		  	<input type="submit" class="btn btn-danger" value="Submit" class="form-control" />
+		</form> 
+	</div>
+</div>
+
+
+
+<!-- Your script will come here -->
+<script type="text/javascript">
+
+var form  = document.getElementById('x-login-form');
+form.onsubmit = function(event){
+	event.preventDefault();
+	var df = new DataForm(form);
+	df.send('https://api.metamug.com/tests/v1.0/form');
+}
+
+</script>
+
+</body>
+</html>
