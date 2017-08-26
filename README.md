@@ -18,7 +18,7 @@ should have be an array of single object. `[{}]`
 
 ```javascript
 var df = new DataForm(form);
-df.fill('https://api.metamug.com/tests/v1.0/form');	
+df.load('https://api.metamug.com/tests/v1.0/form');	
 
 ```
 
