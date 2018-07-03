@@ -13,17 +13,15 @@ Inspired by [HTML5 FormData](https://developer.mozilla.org/en/docs/Web/API/FormD
 
 
 ```javascript
-var df = new DataForm(form);
+var df = new DataForm(form, 'https://api.metamug.com/tests/v1.0/form');
 var data = {"iuser":"John Doe","comment":"I'm awesome."};
 df.fill(data);	
-
 ```
 ###  Load Form with URL (Resource)
 Load the data from ajax GET request. The json response
 should have be an array of single object
 
 ```javascript
-var df = new DataForm(form, 'https://api.metamug.com/tests/v1.0/form');
 df.load();	
 ```
 
@@ -33,6 +31,5 @@ DataForm automatically binds `onsubmit` with `send()` function. It uses HTML5 Fo
 to send as `multipart/form-data` with method `POST`.
 
 ```javascript
-var df = new DataForm(form, 'https://api.metamug.com/tests/v1.0/form');
 df.send();	
 ```
