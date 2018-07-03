@@ -5,7 +5,7 @@ function DataForm(form, url){
 	var that = this;
 
 	//fill up dropdowns
-	var selects = this.form.querySelectorAll("select[data-fill]");
+	var selects = this.form.querySelectorAll("select[data-list]");
 
 	if(selects && selects.length > 0)	
 	selects.forEach(function(select){
