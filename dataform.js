@@ -28,9 +28,9 @@ function DataForm(form, url){
 	inputs.forEach(function(input){
 		   input.onblur = function(event){
 				var xhr = new XMLHttpRequest();
-				xhr.open('GET', that.resource+"?change="+input.name);
+				xhr.open('GET', that.resource+"/"+input.value+"?change="+input.name);
 				xhr.addEventListener('load',function(){
-					var data = JSON.parse(xhr.responseText)
+					var data = JSON.parse(xhr.responseText);
 					that.fill(data[0]);
 				})
 				xhr.send();
@@ -61,9 +61,9 @@ DataForm.prototype.fill = function(obj) {
 };
 
 //Load Internally uses fill(obj), to load data into the form from URL
-DataForm.prototype.load = function() {
+DataForm.prototype.load = function(id) {
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', this.resource+"?q=all");
+	xhr.open('GET', this.resource+"/"+id+"?q=all");
 	var that = this;
 	xhr.addEventListener('load',function(){
 		var data = JSON.parse(xhr.responseText)

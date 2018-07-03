@@ -9,23 +9,25 @@
 <body style="padding:4em;">
 
 <div class="container">
-	<div class="col-md-3 col-md-offset-2">
-		<H3>LOGIN PAGE</H3>	
+	<div class="col-md-5 col-md-offset-2">
+		<H3>Recipe Keeper</H3>	
 		<form id="x-login-form">
 			<div class="form-group">
-			  <label for="xuser">Username</label>
+			  <label for="xuser">Recipe Serve</label>
 			  <input type="text" name="iuser" class="form-control" />
 			</div>
 			<div class="form-group">	 
-			  <label for="xpass">Password</label>
-			  <input type="password" name="xpass" class="form-control" />
-			</div>
-			<div class="form-group">	 
 			  <label for="userType">Type</label>
-			  <select class="form-control" name="userType" data-fill=""></select>
+			  <select class="form-control" name="userType" data-fill="" data-change=""></select>
 		  	</div>
+
 			<div class="form-group">	 
-			  <label for="comment">Details</label>
+			  <label for="xpass">Ingredients</label>
+			  <textarea rows="2" cols="50" name="xpass" class="form-control" ></textarea>
+			</div>
+			
+			<div class="form-group">	 
+			  <label for="comment">Steps</label>
 			  <textarea rows="4" cols="50" name="comment" class="form-control" ></textarea>	
 		  	</div>    
 		  	<input type="submit" class="btn btn-danger" value="Submit" class="form-control" />
@@ -40,7 +42,7 @@
 
 var form  = document.getElementById('x-login-form');
 var dataForm = new DataForm(form, "https://api.metamug.com/recipe/v1.0/form");
-dataForm.load();
+dataForm.load(2);
 
 </script>
 
