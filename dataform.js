@@ -2,18 +2,21 @@
 function DataForm(form, url){
 	this.form = form;
 	this.resource = url;
-	
+	var that = this;
+
 	//fill up dropdowns
-	var selects = this.form.getElementsByTagName("select");	
+	var selects = this.form.querySelectorAll("select[data-fill]");
+
+	if(selects && selects.length > 0)	
 	selects.forEach(function(select){
 		var xhr = new XMLHttpRequest();
-		xhr.open('GET', this.resource+"?select="+select.name)
+		xhr.open('GET', that.resource+"?select="+select.name)
 		xhr.addEventListener('load',function(){
 			var options = JSON.parse(xhr.responseText)
-		    options.forEach(function(option){
+		    options.forEach(function(item){
 				var option = document.createElement("option");
-				option.value = option.value;
-				option.text = option.text;
+				option.value = item.value;
+				option.text = item.text;
 				select.appendChild(option)
 			})
 		})
@@ -22,23 +25,22 @@ function DataForm(form, url){
 	
 	//onchange change dependent fields
 	var inputs = this.form.querySelectorAll('[data-change]');
-	inputs.forEach(function(input)){
+	inputs.forEach(function(input){
 		   input.onblur = function(event){
 				var xhr = new XMLHttpRequest();
-				xhr.open('GET', this.resource+"?change="+input.name);
-				var that = this;
+				xhr.open('GET', that.resource+"?change="+input.name);
 				xhr.addEventListener('load',function(){
 					var data = JSON.parse(xhr.responseText)
 					that.fill(data[0]);
 				})
 				xhr.send();
 		   }
-   	}
+   	});
 	
 	//send the form on submit
-	this.form.onsubmit = function(){
-		this.send();
-		return false; //suppress default submit option
+	this.form.onsubmit = function(event){
+		that.send(event);
+		return false; //suppress default submit
 	}
 }
 
@@ -61,7 +63,7 @@ DataForm.prototype.fill = function(obj) {
 //Load Internally uses fill(obj), to load data into the form from URL
 DataForm.prototype.load = function() {
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', this.resource);
+	xhr.open('GET', this.resource+"?q=all");
 	var that = this;
 	xhr.addEventListener('load',function(){
 		var data = JSON.parse(xhr.responseText)
@@ -71,7 +73,7 @@ DataForm.prototype.load = function() {
 };
 
 //send data on server with FormData
-DataForm.prototype.send = function() {
+DataForm.prototype.send = function(event) {
 	var xhr = new XMLHttpRequest();
 	var data = new FormData(this.form);
 	//open the request
